@@ -48,6 +48,10 @@ body {
   transition: color 0.3s ease-in-out;
 }
 
+.button-with-icon:hover svg {
+  animation: spin 1s linear infinite;
+}
+
 .button-with-icon:hover span {
   color: white;
 }
@@ -58,5 +62,11 @@ body {
   }
   100% {
     background-position: 100% 50%;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }
