@@ -17,6 +17,8 @@ body {
   }
   
   .button-with-icon {
+    width: 20px;
+    height: 20px;
     border: none;
     cursor: pointer;
     display: flex;
@@ -68,5 +70,80 @@ body {
 @keyframes spin {
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(150, 160, 180, 0.8);
+}
+
+.dot:nth-child(1) {
+  transform: rotate(0deg) translate(40px) rotate(0deg);
+}
+
+.dot:nth-child(2) {
+  transform: rotate(72deg) translate(40px) rotate(-72deg);
+}
+
+.dot:nth-child(3) {
+  transform: rotate(144deg) translate(40px) rotate(-144deg);
+}
+
+.dot:nth-child(4) {
+  transform: rotate(216deg) translate(40px) rotate(-216deg);
+}
+
+.dot:nth-child(5) {
+  transform: rotate(288deg) translate(40px) rotate(-288deg);
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg) translate(40px) rotate(0deg);
+  }
+  10% {
+    transform: rotate(0deg) translate(40px) rotate(-10deg);
+  }
+  20% {
+    transform: rotate(0deg) translate(40px) rotate(10deg);
+  }
+  30% {
+    transform: rotate(0deg) translate(40px) rotate(-10deg);
+  }
+  40% {
+    transform: rotate(0deg) translate(40px) rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg) translate(40px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg) translate(40px) rotate(0deg);
+  }
+}
+
+@keyframes flyOff {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300px) rotate(360deg);
   }
 }
