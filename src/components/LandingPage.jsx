@@ -5,15 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const Loader = () => {
-  return <div className="loader">
-          <div className="dot" style={{ background: '#ff0000' }}></div>
-          <div className="dot" style={{ background: '#ff7f00' }}></div>
-          <div className="dot" style={{ background: '#ffff00' }}></div>
-          <div className="dot" style={{ background: '#00ff00' }}></div>
-          <div className="dot" style={{ background: '#0000ff' }}></div>
-  </div>;
+  return (
+    <div className="loader-container">
+      <div className="button-with-icon loader">
+        <p className="loader-text">Enter then..</p>
+      </div>
+    </div>
+  );
 };
-
 const ButtonWithIcon = ({ onClick }) => {
   return (
     <div className="button-container">
@@ -31,13 +30,12 @@ function LandingPage() {
 
   const handleClick = () => {
     setIsLoading(true);
-    // Perform any necessary loading actions here (e.g., API requests)
 
     // Simulate loading for 2 seconds
     setTimeout(() => {
       setIsLoading(false);
       navigate('/homepage'); // Navigate to the homepage
-    }, 2000);
+    }, 1500);
   };
 
   return (
