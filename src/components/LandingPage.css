@@ -5,11 +5,11 @@
   height: 100vh;
   background-color: #F8F8FF;
   margin: 0;
+  flex: 0;
 }
 
 body {
   margin: 0;
-  overflow: hidden;
 }
 
 .button-container {
@@ -80,7 +80,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
