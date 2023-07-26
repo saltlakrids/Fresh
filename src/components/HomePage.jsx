@@ -7,6 +7,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HomePage = () => {
   const sectionRefs = useRef([]);
+  const headerRef = useRef(null);
+  const footerRef = useRef(null);
 
   const setInitialBackgroundPosition = () => {
     gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
@@ -14,7 +16,7 @@ const HomePage = () => {
       const scrollTrigger = ScrollTrigger.getById(section.id);
       if (scrollTrigger) {
         const startPosY = scrollTrigger.start === 'top top' ? '0%' : '100%';
-        gsap.set(bg, { backgroundPosition: `50% ${startPosY}` });
+        gsap.to(bg, { backgroundPosition: `50% ${startPosY}`, duration: 0 }); // Use gsap.to with duration 0 to set initial position
       }
     });
     ScrollTrigger.refresh(); // Refresh the ScrollTrigger after setting the initial background position
@@ -29,7 +31,9 @@ const HomePage = () => {
         const startPosY = scrollTrigger.start === 'top top' ? '0%' : '100%';
         const endPosY = scrollTrigger.end === 'bottom top' ? '0%' : '100%';
         gsap.to(bg, {
-          backgroundPosition: `50% ${gsap.utils.interpolate(startPosY, endPosY, progress)}`,
+          scrollTo: {
+            y: gsap.utils.interpolate(startPosY, endPosY, progress),
+          },
           ease: 'none',
         });
       }
@@ -42,21 +46,40 @@ const HomePage = () => {
       bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
     });
 
-    ScrollTrigger.batch(sectionRefs.current, {
-      onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
-      onLeave: (batch) => gsap.set(batch, { opacity: 0, y: 100, overwrite: true }),
-      onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
-      onLeaveBack: (batch) => gsap.set(batch, { opacity: 0, y: -100, overwrite: true }),
-      start: 'top 80%',
-      end: 'bottom 20%',
+    // Set up ScrollTrigger for each section
+    gsap.utils.toArray(sectionRefs.current).forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom', // Change the start trigger to 'top bottom'
+        end: 'bottom top', // Change the end trigger to 'bottom top'
+        scrub: true,
+        onRefresh: updateBackgroundPosition,
+      });
     });
 
     setInitialBackgroundPosition();
-  }, [setInitialBackgroundPosition]);
+
+    // Animate the header and footer when the component mounts
+    gsap.from(headerRef.current, { opacity: 0, y: -50, duration: 1 });
+    gsap.from(footerRef.current, { opacity: 0, y: 50, duration: 1 });
+  }, []);
+
+  useEffect(() => {
+    gsap.utils.toArray(sectionRefs.current).forEach((section) => {
+      ScrollTrigger.batch(section, {
+        onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
+        onLeave: (batch) => gsap.set(batch, { opacity: 0, y: 100, overwrite: true }),
+        onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
+        onLeaveBack: (batch) => gsap.set(batch, { opacity: 0, y: -100, overwrite: true }),
+        start: 'top 90%', // Adjust the start trigger to start the effect earlier
+        end: 'bottom 10%', // Adjust the end trigger to continue the effect till the end of the scroll
+      });
+    });
+  }, []);
 
   return (
     <>
-      <header>
+      <header ref={headerRef}>
         <h1>Header</h1>
       </header>
 
@@ -76,7 +99,6 @@ const HomePage = () => {
 
       <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
         <div className="bg"></div>
-        <h1>Simple parallax sections</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sagittis sapien, vel varius urna. Vivamus in
           magna vel odio fringilla bibendum. Integer in tellus at velit cursus euismod vel sit amet ligula. Duis a aliquam
@@ -86,6 +108,7 @@ const HomePage = () => {
           consectetur nunc. Ut egestas orci sit amet justo feugiat, eget pellentesque nunc posuere. Integer id ultrices
           orci.
         </p>
+        <h1>Simple parallax sections</h1>
       </section>
 
       <section className="scroll-section" ref={(el) => (sectionRefs.current[2] = el)}>
@@ -102,7 +125,7 @@ const HomePage = () => {
         </p>
       </section>
 
-      <footer>
+      <footer ref={footerRef}>
         <h1>Footer</h1>
       </footer>
     </>
