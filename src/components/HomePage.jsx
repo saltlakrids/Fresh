@@ -34,7 +34,8 @@ const HomePage = () => {
           scrollTo: {
             y: gsap.utils.interpolate(startPosY, endPosY, progress),
           },
-          ease: 'none',
+          ease: 'power2.out', // Adjust the ease to 'power3.out' for smoother effect
+          overwrite: 'auto', // Let GSAP handle overwriting previous animations
         });
       }
     });
@@ -58,10 +59,6 @@ const HomePage = () => {
     });
 
     setInitialBackgroundPosition();
-
-    // Animate the header and footer when the component mounts
-    gsap.from(headerRef.current, { opacity: 0, y: -50, duration: 1 });
-    gsap.from(footerRef.current, { opacity: 0, y: 50, duration: 1 });
   }, []);
 
   useEffect(() => {
@@ -75,10 +72,34 @@ const HomePage = () => {
         end: 'bottom 10%', // Adjust the end trigger to continue the effect till the end of the scroll
       });
     });
+
+    // Animate the header when it comes into view
+    ScrollTrigger.create({
+      trigger: headerRef.current,
+      start: 'top center',
+      onEnter: () => gsap.fromTo(headerRef.current, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 1 }),
+      onLeaveBack: () => gsap.to(headerRef.current, { opacity: 0, y: -50, duration: 1 }),
+    });
+
+    // Animate the footer when it comes into view
+    ScrollTrigger.create({
+      trigger: footerRef.current,
+      start: 'top bottom', // Change this to trigger when the top of the footer is at the bottom of the viewport
+      onEnter: () => gsap.fromTo(footerRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }),
+      onLeave: () => gsap.to(footerRef.current, { opacity: 0, y: 50, duration: 1 }),
+      onEnterBack: () => gsap.fromTo(footerRef.current, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 1 }),
+      onLeaveBack: () => gsap.to(footerRef.current, { opacity: 0, y: -50, duration: 1 }),
+    });
+
+    return () => {
+      // Cleanup ScrollTriggers when component unmounts
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
     <>
+    <div className="container">
       <header ref={headerRef}>
         <h1>Header</h1>
       </header>
@@ -128,6 +149,7 @@ const HomePage = () => {
       <footer ref={footerRef}>
         <h1>Footer</h1>
       </footer>
+      </div>
     </>
   );
 };
