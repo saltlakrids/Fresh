@@ -56,6 +56,25 @@ const HomePage = () => {
       });
     });
 
+    gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const content = contentRefs.current[i];
+
+          gsap.to(content, {
+            opacity: 2 - progress, // Fade in content as you scroll down
+            y: -progress * 100, // Move content up as you scroll down
+            duration: 0.5,
+            overwrite: 'auto',
+          });
+        },
+      });
+    });
 
 
     setInitialBackgroundPosition();
