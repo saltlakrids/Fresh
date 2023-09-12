@@ -50,3 +50,32 @@ footer {
   margin: 0 auto;
   padding: 1rem;
 }
+
+
+/* Swiper */
+.swiper {
+  width: 350px;
+  height: 350px;
+}
+
+
+.swiper-pagination-bullets {
+  margin-bottom: 25px;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  border-radius: 55%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import feature from '../img/feature-modern.png';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 import './Homepage.css';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +18,7 @@ const HomePage = () => {
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const contentRefs = useRef([]);
+ 
 
   const setInitialBackgroundPosition = () => {
     gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
@@ -22,6 +31,7 @@ const HomePage = () => {
     });
     ScrollTrigger.refresh();
   };
+
 
   const updateBackgroundPosition = () => {
     gsap.utils.toArray(sectionRefs.current).forEach((section) => {
@@ -135,13 +145,13 @@ const HomePage = () => {
     <>
       <div className="container">
         <header ref={headerRef}>
-          <h1>Header</h1>
+          <h1>OSO</h1>
         </header>
 
         <section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
-            <h1>Simple parallax sections</h1>
+            <h1>- intro</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sagittis sapien, vel varius urna. Vivamus
               in magna vel odio fringilla bibendum. Integer in tellus at velit cursus euismod vel sit amet ligula. Duis a
@@ -166,23 +176,38 @@ const HomePage = () => {
               nec, consectetur nunc. Ut egestas orci sit amet justo feugiat, eget pellentesque nunc posuere. Integer id
               ultrices orci.
             </p>
-            <h1>Simple parallax sections</h1>
+            <h1>about -</h1>
           </div>
         </section>
 
         <section className="scroll-section" ref={(el) => (sectionRefs.current[2] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[2] = el)}>
-            <h1>Simple parallax sections</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sagittis sapien, vel varius urna. Vivamus
-              in magna vel odio fringilla bibendum. Integer in tellus at velit cursus euismod vel sit amet ligula. Duis a
-              aliquam odio. Nullam at hendrerit turpis. Fusce fringilla, metus ac tristique volutpat, justo arcu rhoncus
-              neque, ut fringilla turpis nunc eu velit. Nam pharetra consectetur massa id rhoncus. Etiam vehicula libero in
-              ipsum laoreet, vel egestas velit accumsan. Curabitur ac blandit massa. Sed eu ipsum consectetur, tempor elit
-              nec, consectetur nunc. Ut egestas orci sit amet justo feugiat, eget pellentesque nunc posuere. Integer id
-              ultrices orci.
-            </p>
+            <h1>- projects</h1>
+            <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={false}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+      </Swiper>
           </div>
         </section>
 
