@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import feature from '../img/feature-modern.png';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -7,18 +7,21 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-
+import Typewriter from '../components/TypeWriter';
+import SwiperComponent from '../components/SwiperComponent';
+import AboutTabs from '../components/AboutTabs';
 import './Homepage.css';
 
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 const HomePage = () => {
   const sectionRefs = useRef([]);
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const contentRefs = useRef([]);
- 
+
 
   const setInitialBackgroundPosition = () => {
     gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
@@ -32,6 +35,11 @@ const HomePage = () => {
     ScrollTrigger.refresh();
   };
 
+  const sentences = [
+    'Welcome to my portfolio',
+    'I am passioned about webdeveloping',
+    'Lets connect!',
+  ];
 
   const updateBackgroundPosition = () => {
     gsap.utils.toArray(sectionRefs.current).forEach((section) => {
@@ -99,6 +107,7 @@ const HomePage = () => {
       ScrollTrigger.removeEventListener('scroll', updateBackgroundPosition);
     };
   }, []);
+  
 
   useEffect(() => {
     gsap.utils.toArray(sectionRefs.current).forEach((section) => {
@@ -151,63 +160,37 @@ const HomePage = () => {
         <section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
-            <h1>- intro</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sagittis sapien, vel varius urna. Vivamus
-              in magna vel odio fringilla bibendum. Integer in tellus at velit cursus euismod vel sit amet ligula. Duis a
-              aliquam odio. Nullam at hendrerit turpis. Fusce fringilla, metus ac tristique volutpat, justo arcu rhoncus
-              neque, ut fringilla turpis nunc eu velit. Nam pharetra consectetur massa id rhoncus. Etiam vehicula libero in
-              ipsum laoreet, vel egestas velit accumsan. Curabitur ac blandit massa. Sed eu ipsum consectetur, tempor elit
-              nec, consectetur nunc. Ut egestas orci sit amet justo feugiat, eget pellentesque nunc posuere. Integer id
-              ultrices orci.
-            </p>
+          <h3>Hello world!</h3>
+      <h1>I'm Oscar Schou</h1>
+      <h2>Frontend Developer</h2>
+      <div className='typewrite'>
+      <Typewriter
+        sentences={sentences}
+        typingSpeed={100} 
+        deletingSpeed={70} 
+        pauseTime={1000} 
+      />
+    </div>
+      <h4>I am presently engaged in freelance work but am actively seeking new opportunities for full-time employment to take on fresh challenges.</h4>
+
+      
+
           </div>
         </section>
 
         <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[1] = el)}>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sagittis sapien, vel varius urna. Vivamus
-              in magna vel odio fringilla bibendum. Integer in tellus at velit cursus euismod vel sit amet ligula. Duis a
-              aliquam odio. Nullam at hendrerit turpis. Fusce fringilla, metus ac tristique volutpat, justo arcu rhoncus
-              neque, ut fringilla turpis nunc eu velit. Nam pharetra consectetur massa id rhoncus. Etiam vehicula libero in
-              ipsum laoreet, vel egestas velit accumsan. Curabitur ac blandit massa. Sed eu ipsum consectetur, tempor elit
-              nec, consectetur nunc. Ut egestas orci sit amet justo feugiat, eget pellentesque nunc posuere. Integer id
-              ultrices orci.
-            </p>
-            <h1>about -</h1>
+          <h1>About me</h1>
+          <AboutTabs />
           </div>
         </section>
 
         <section className="scroll-section" ref={(el) => (sectionRefs.current[2] = el)}>
-          <div className="bg"></div>
+        <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[2] = el)}>
-            <h1>- projects</h1>
-            <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={false}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-      </Swiper>
+          <h1>Projects</h1>
+            <SwiperComponent />
           </div>
         </section>
 

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
-import LandingPage from './components/LandingPage';
-import HomePage from './components/HomePage';
+import LandingPage from './views/LandingPage';
+import HomePage from './views/HomePage';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 ReactDOM.render(
