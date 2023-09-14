@@ -1,20 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import feature from '../img/feature-modern.png';
+
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 import Typewriter from '../components/TypeWriter';
 import SwiperComponent from '../components/SwiperComponent';
 import AboutTabs from '../components/AboutTabs';
 import './Homepage.css';
 
-
 gsap.registerPlugin(ScrollTrigger);
-
 
 const HomePage = () => {
   const sectionRefs = useRef([]);
@@ -22,23 +19,16 @@ const HomePage = () => {
   const footerRef = useRef(null);
   const contentRefs = useRef([]);
 
-
-  const setInitialBackgroundPosition = () => {
-    gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
-      const bg = section.querySelector('.bg');
-      const scrollTrigger = ScrollTrigger.getById(section.id);
-      if (scrollTrigger) {
-        const startPosY = scrollTrigger.start === 'top top' ? '0%' : '100%';
-        gsap.to(bg, { backgroundPosition: `50% ${startPosY}`, duration: 0 });
-      }
-    });
-    ScrollTrigger.refresh();
+  const setInitialBackgroundColors = () => {
+    gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); // Dark gray
+    gsap.set(sectionRefs.current[1], { backgroundColor: '#ADEFD1FF' }); // Light gray
+    gsap.set(sectionRefs.current[2], { backgroundColor: '#00203FFF' }); // Dark gray
   };
 
   const sentences = [
     'Welcome to my portfolio',
-    'I am passioned about webdeveloping',
-    'Lets connect!',
+    'I am passionate about web development',
+    'Let\'s connect!',
   ];
 
   const updateBackgroundPosition = () => {
@@ -51,7 +41,7 @@ const HomePage = () => {
         const endPosY = scrollTrigger.end === 'bottom top' ? '0%' : '100%';
         gsap.to(bg, {
           backgroundPosition: `50% ${gsap.utils.interpolate(startPosY, endPosY, progress)}`,
-          duration: 0.5, // Reduce the duration for smoother scrolling
+          duration: 0.5,
           overwrite: 'auto',
         });
       }
@@ -59,10 +49,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    gsap.utils.toArray(sectionRefs.current).forEach((section, i) => {
-      const bg = section.querySelector('.bg');
-      bg.style.backgroundImage = `url(https://picsum.photos/1600/800?random=${i})`;
-    });
+    setInitialBackgroundColors();
 
     gsap.utils.toArray(sectionRefs.current).forEach((section) => {
       ScrollTrigger.create({
@@ -85,8 +72,8 @@ const HomePage = () => {
           const content = contentRefs.current[i];
 
           gsap.to(content, {
-            opacity: 2 - progress, // Fade in content as you scroll down
-            y: -progress * 100, // Move content up as you scroll down
+            opacity: 2 - progress,
+            y: -progress * 100,
             duration: 0.5,
             overwrite: 'auto',
           });
@@ -94,8 +81,23 @@ const HomePage = () => {
       });
     });
 
+    // Replace the content inside these sections with your own
+    // Section 1 content
+    gsap.to(contentRefs.current[0], {
+      // Your animations and styles for section 1 content
+    });
 
-    setInitialBackgroundPosition();
+    // Section 2 content (About Me)
+    gsap.to(contentRefs.current[1], {
+      // Your animations and styles for section 2 content (About Me)
+    });
+
+    // Section 3 content (Projects)
+    gsap.to(contentRefs.current[2], {
+      // Your animations and styles for section 3 content (Projects)
+    });
+
+    // ... Add more sections if needed ...
 
     // Increase the frequency of background position updates when scrolling
     ScrollTrigger.addEventListener('scroll', updateBackgroundPosition);
@@ -107,48 +109,6 @@ const HomePage = () => {
       ScrollTrigger.removeEventListener('scroll', updateBackgroundPosition);
     };
   }, []);
-  
-
-  useEffect(() => {
-    gsap.utils.toArray(sectionRefs.current).forEach((section) => {
-      ScrollTrigger.batch(section, {
-        onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
-        onLeave: (batch) => gsap.set(batch, { opacity: 0, y: 100, overwrite: true }),
-        onEnterBack: (batch) => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.2, overwrite: true }),
-        onLeaveBack: (batch) => gsap.set(batch, { opacity: 0, y: -100, overwrite: true }),
-        start: 'top 90%',
-        end: 'bottom 10%',
-      });
-    });
-
-    ScrollTrigger.create({
-      trigger: headerRef.current,
-      start: 'top center',
-      onEnter: () => gsap.fromTo(headerRef.current, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 1 }),
-      onLeaveBack: () => gsap.to(headerRef.current, { opacity: 0, y: -50, duration: 1 }),
-    });
-
-    ScrollTrigger.create({
-      trigger: footerRef.current,
-      start: 'top bottom',
-      onEnter: () => gsap.fromTo(footerRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }),
-      onLeave: () => gsap.to(footerRef.current, { opacity: 0, y: 50, duration: 1 }),
-      onEnterBack: () => gsap.fromTo(footerRef.current, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 1 }),
-      onLeaveBack: () => gsap.to(footerRef.current, { opacity: 0, y: -50, duration: 1 }),
-    });
-
-    gsap.utils.toArray(contentRefs.current).forEach((content) => {
-      ScrollTrigger.create({
-        trigger: content,
-        start: 'top 90%',
-        end: 'bottom 10%',
-        onEnter: (el) => gsap.fromTo(el, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 }),
-        onLeave: (el) => gsap.to(el, { opacity: 0, y: 50, duration: 1 }),
-        onEnterBack: (el) => gsap.fromTo(el, { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 1 }),
-        onLeaveBack: (el) => gsap.to(el, { opacity: 0, y: -50, duration: 1 }),
-      });
-    });
-  }, []);
 
   return (
     <>
@@ -157,42 +117,47 @@ const HomePage = () => {
           <h1>OSO</h1>
         </header>
 
+        {/* Section 1 */}
         <section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
-          <h3>Hello world!</h3>
-      <h1>I'm Oscar Schou</h1>
-      <h2>Frontend Developer</h2>
-      <div className='typewrite'>
-      <Typewriter
-        sentences={sentences}
-        typingSpeed={100} 
-        deletingSpeed={70} 
-        pauseTime={1000} 
-      />
-    </div>
-      <h4>I am presently engaged in freelance work but am actively seeking new opportunities for full-time employment to take on fresh challenges.</h4>
-
-      
-
+            {/* Replace this with your Section 1 content */}
+            <h3>Hello world!</h3>
+            <h1>I'm Oscar Schou</h1>
+            <h2>Frontend Developer</h2>
+            <div className='typewrite'>
+              <Typewriter
+                sentences={sentences}
+                typingSpeed={100} 
+                deletingSpeed={70} 
+                pauseTime={1000} 
+              />
+            </div>
+            <h4>I am presently engaged in freelance work but am actively seeking new opportunities for full-time employment to take on fresh challenges.</h4>
           </div>
         </section>
 
+        {/* Section 2 */}
         <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[1] = el)}>
-          <h1>About me</h1>
-          <AboutTabs />
+            {/* Replace this with your Section 2 content (About Me) */}
+            <h1>About me</h1>
+            <AboutTabs />
           </div>
         </section>
 
+        {/* Section 3 */}
         <section className="scroll-section" ref={(el) => (sectionRefs.current[2] = el)}>
-        <div className="bg"></div>
+          <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[2] = el)}>
-          <h1>Projects</h1>
+            {/* Replace this with your Section 3 content (Projects) */}
+            <h1>Projects</h1>
             <SwiperComponent />
           </div>
         </section>
+
+        {/* Add more sections if needed */}
 
         <footer ref={footerRef}>
           <h1>Footer</h1>

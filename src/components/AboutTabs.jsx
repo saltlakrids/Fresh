@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 const AboutTabs = () => {
   const [activeTab, setActiveTab] = useState(1);
 
@@ -33,20 +32,26 @@ const AboutTabs = () => {
       <div className="tab-content">
         {activeTab === 1 && (
           <div>
-            <p>Content for Tab 1</p>
-            <img src="image1.jpg" alt="Image 1" />
+            <div className="tab-content-row">
+              <p>Content for Tab 1</p>
+              <img src="image1.jpg" alt="Image 1" />
+            </div>
           </div>
         )}
         {activeTab === 2 && (
           <div>
-            <p>Content for Tab 2</p>
-            <img src="image2.jpg" alt="Image 2" />
+            <div className="tab-content-row">
+              <p>Content for Tab 2</p>
+              <img src="image2.jpg" alt="Image 2" />
+            </div>
           </div>
         )}
         {activeTab === 3 && (
           <div>
-            <p>Content for Tab 3</p>
-            <img src="image3.jpg" alt="Image 3" />
+            <div className="tab-content-row">
+              <p>Content for Tab 3</p>
+              <img src="image3.jpg" alt="Image 3" />
+            </div>
           </div>
         )}
       </div>

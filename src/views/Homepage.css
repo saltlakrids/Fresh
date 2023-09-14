@@ -169,7 +169,6 @@ footer {
   color: #fff;
   transform: scale(1.05);
 }
-
 .tab-content {
   text-align: center;
   margin-top: 20px;
@@ -183,10 +182,20 @@ footer {
   margin-top: 20px;
 }
 
+.tab-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 20px;
+
+}
+
 .tab-content img {
-  max-width: 100%;
+  max-width: 50%; /* Adjust image width as needed */
   height: auto;
 }
+
 
 /* Media query for smaller screens (e.g., mobile devices) */
 @media screen and (max-width: 768px) {
