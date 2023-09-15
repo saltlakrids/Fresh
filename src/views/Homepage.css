@@ -31,6 +31,7 @@ h2 {
     font-size: 15px;
   }
 
+
   .typewrite {
     text-decoration: none;
     font-size: 1.5rem;
@@ -38,6 +39,34 @@ h2 {
     font-family: 'Lato', sans-serif;
     color: #fff;
   }
+
+  .profile-picture {
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    border: 1 px #333;
+  }
+  
+  .profile-video {
+    width: 100%; /* Make the video element fill the circular container */
+    height: 100%; /* Make the video element fill the circular container */
+    object-fit: cover; /* Maintain video aspect ratio and cover the entire circular container */
+  }
+  
+
+
+.social-icon.github-icon {
+  color: #fff; 
+  margin-right: 20px;
+}
+
+.social-icon.linkedin-icon {
+  color: #fff; 
+  margin-right: 20px;
+}
+
+
   
 
 header {
@@ -98,6 +127,7 @@ footer {
 .swiper-pagination-bullets {
   margin-bottom: 25px;
 }
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -196,6 +226,9 @@ footer {
   height: auto;
 }
 
+.scroll-section {
+  background-size: cover;
+}
 
 /* Media query for smaller screens (e.g., mobile devices) */
 @media screen and (max-width: 768px) {

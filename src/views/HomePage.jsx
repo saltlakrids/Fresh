@@ -1,14 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Typewriter from '../components/TypeWriter';
 import SwiperComponent from '../components/SwiperComponent';
 import AboutTabs from '../components/AboutTabs';
+import profileVid from '../img/IMG_1056.mp4'
+import backgroundImg from '../img/IMG_0544.png';
+
 import './Homepage.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,9 +23,9 @@ const HomePage = () => {
   const contentRefs = useRef([]);
 
   const setInitialBackgroundColors = () => {
-    gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); // Dark gray
-    gsap.set(sectionRefs.current[1], { backgroundColor: '#ADEFD1FF' }); // Light gray
-    gsap.set(sectionRefs.current[2], { backgroundColor: '#00203FFF' }); // Dark gray
+    gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); 
+    gsap.set(sectionRefs.current[1], { backgroundColor: '#ADEFD1FF' }); 
+    gsap.set(sectionRefs.current[2], { backgroundColor: '#00203FFF' })
   };
 
   const sentences = [
@@ -81,24 +84,6 @@ const HomePage = () => {
       });
     });
 
-    // Replace the content inside these sections with your own
-    // Section 1 content
-    gsap.to(contentRefs.current[0], {
-      // Your animations and styles for section 1 content
-    });
-
-    // Section 2 content (About Me)
-    gsap.to(contentRefs.current[1], {
-      // Your animations and styles for section 2 content (About Me)
-    });
-
-    // Section 3 content (Projects)
-    gsap.to(contentRefs.current[2], {
-      // Your animations and styles for section 3 content (Projects)
-    });
-
-    // ... Add more sections if needed ...
-
     // Increase the frequency of background position updates when scrolling
     ScrollTrigger.addEventListener('scroll', updateBackgroundPosition);
 
@@ -117,25 +102,43 @@ const HomePage = () => {
           <h1>OSO</h1>
         </header>
 
-        {/* Section 1 */}
-        <section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)}>
-          <div className="bg"></div>
-          <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
-            {/* Replace this with your Section 1 content */}
-            <h3>Hello world!</h3>
-            <h1>I'm Oscar Schou</h1>
-            <h2>Frontend Developer</h2>
-            <div className='typewrite'>
-              <Typewriter
-                sentences={sentences}
-                typingSpeed={100} 
-                deletingSpeed={70} 
-                pauseTime={1000} 
-              />
-            </div>
-            <h4>I am presently engaged in freelance work but am actively seeking new opportunities for full-time employment to take on fresh challenges.</h4>
-          </div>
-        </section>
+{/* Section 1 */}
+<section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)} style={{ backgroundImage: `url(${backgroundImg})`,    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat', }}>
+  <div className="bg"></div>
+  <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
+    <h3>Hello world!</h3>
+    <h1>I'm Oscar Schou</h1>
+    <div className="profile-picture">
+  <video autoPlay loop muted playsInline className="profile-video">
+    <source src={profileVid} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+    </div>
+    <h2>Frontend Developer</h2>
+    <div className='typewrite'>
+      <Typewriter
+        sentences={sentences}
+        typingSpeed={100} 
+        deletingSpeed={70} 
+        pauseTime={1000} 
+      />
+    </div>
+    <h4 className='text'>
+      I am presently engaged in freelance work,<br/> but am actively seeking new opportunities for full-time employment to take on fresh challenges.<br/>Reach out for a chat!
+    </h4>
+    <div className="social-buttons">
+  <a href="https://github.com/saltlakrids" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faGithub} size="2x" className="social-icon github-icon" />
+  </a>
+  <a href="https://www.linkedin.com/in/oscar-schou/" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faLinkedin} size="2x" className="social-icon linkedin-icon" />
+  </a>
+</div>
+
+  </div>
+</section>
+
 
         {/* Section 2 */}
         <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
