@@ -109,12 +109,12 @@ const HomePage = () => {
   <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
     <h3>Hello world!</h3>
     <h1>I'm Oscar Schou</h1>
-    <div className="profile-picture">
+    {/* <div className="profile-picture">
   <video autoPlay loop muted playsInline className="profile-video">
     <source src={profileVid} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-    </div>
+    </div> */}
     <h2>Frontend Developer</h2>
     <div className='typewrite'>
       <Typewriter
