@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import 'swiper/css';
@@ -9,23 +9,43 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Typewriter from '../components/TypeWriter';
 import SwiperComponent from '../components/SwiperComponent';
 import AboutTabs from '../components/AboutTabs';
-import profileVid from '../img/IMG_1056.mp4'
 import backgroundImg from '../img/IMG_0544.png';
 
 import './Homepage.css';
 
 gsap.registerPlugin(ScrollTrigger);
+let isScrollingDown = false;
+
 
 const HomePage = () => {
   const sectionRefs = useRef([]);
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const contentRefs = useRef([]);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   const setInitialBackgroundColors = () => {
     gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); 
     gsap.set(sectionRefs.current[1], { backgroundColor: '#ADEFD1FF' }); 
     gsap.set(sectionRefs.current[2], { backgroundColor: '#00203FFF' })
+  };
+
+  const toggleHeaderVisibility = () => {
+    if (isScrollingDown) {
+      // Hide the header when scrolling down
+      gsap.to(headerRef.current, {
+        duration: 0.3,
+        y: -headerRef.current.clientHeight,
+        onComplete: () => setIsHeaderVisible(false),
+      });
+    } else {
+      // Show the header when scrolling up
+      gsap.to(headerRef.current, {
+        duration: 0.3,
+        y: 0,
+        onComplete: () => setIsHeaderVisible(true),
+      });
+    }
   };
 
   const sentences = [
@@ -84,16 +104,29 @@ const HomePage = () => {
       });
     });
 
-    // Increase the frequency of background position updates when scrolling
     ScrollTrigger.addEventListener('scroll', updateBackgroundPosition);
 
+    ScrollTrigger.create({
+      trigger: sectionRefs.current[0], // Adjust the trigger element as needed
+      start: 'top top',
+      end: 'bottom top',
+      onEnter: () => {
+        isScrollingDown = false; // Set scrolling direction to up when entering the trigger area
+        toggleHeaderVisibility();
+      },
+      onLeave: () => {
+        isScrollingDown = true; // Set scrolling direction to down when leaving the trigger area
+        toggleHeaderVisibility();
+      },
+    });
+    
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-      // Remove the scroll event listener when component unmounts
       ScrollTrigger.removeEventListener('scroll', updateBackgroundPosition);
     };
   }, []);
+  
 
   return (
     <>

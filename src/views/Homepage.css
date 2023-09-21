@@ -5,11 +5,12 @@ body {
   background-color: #333;
 }
 
+
 h1 {
   font-size: 2em;
   font-weight: 600;
   letter-spacing: 2px;
-  color: #ffffff;
+  color: #fff;
 }
 
 h2 {
@@ -21,7 +22,7 @@ h2 {
   h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #fff;
   }
   
   h4, h5, h6 {
@@ -30,6 +31,11 @@ h2 {
     font-weight: 400;
     font-size: 15px;
   }
+h1, h2, h3, h4, h5, h6, .typewrite {
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 5); 
+  }
+
+
 
 
   .typewrite {
@@ -59,11 +65,13 @@ h2 {
 .social-icon.github-icon {
   color: #fff; 
   margin-right: 20px;
+  filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 5));
 }
 
 .social-icon.linkedin-icon {
   color: #fff; 
   margin-right: 20px;
+  filter: drop-shadow( 3px 3px 4px rgba(0, 0, 0, 5));
 }
 
 
@@ -195,10 +203,11 @@ footer {
 }
 
 .about-tab.active {
-  background-color: #75fe47;
+  background-color: #333;
   color: #fff;
   transform: scale(1.05);
 }
+
 .tab-content {
   text-align: center;
   margin-top: 20px;
