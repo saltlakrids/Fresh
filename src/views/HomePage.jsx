@@ -10,6 +10,8 @@ import Typewriter from '../components/TypeWriter';
 import SwiperComponent from '../components/SwiperComponent';
 import AboutTabs from '../components/AboutTabs';
 import backgroundImg from '../img/IMG_0544.png';
+import MyParticles from '../components/Particles';
+
 
 import './Homepage.css';
 
@@ -24,10 +26,16 @@ const HomePage = () => {
   const contentRefs = useRef([]);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
+  
+
   const setInitialBackgroundColors = () => {
     gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); 
-    gsap.set(sectionRefs.current[1], { backgroundColor: '#ADEFD1FF' }); 
-    gsap.set(sectionRefs.current[2], { backgroundColor: '#00203FFF' })
+    gsap.set(sectionRefs.current[1], {
+      background: 'linear-gradient(to bottom, #ADEFD1FF, #00203FFF)',
+    });
+    gsap.set(sectionRefs.current[2], {
+      backgroundColor: '#00203FFF' ,
+    });
   };
 
   const toggleHeaderVisibility = () => {
@@ -136,10 +144,10 @@ const HomePage = () => {
         </header>
 
 {/* Section 1 */}
-<section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)} style={{ backgroundImage: `url(${backgroundImg})`,    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat', }}>
+<section className="scroll-section" ref={(el) => (sectionRefs.current[0] = el)} style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
   <div className="bg"></div>
   <div className="content" ref={(el) => (contentRefs.current[0] = el)}>
+    <div className="left-aligned-content">
     <h3>Hello world!</h3>
     <h1>I'm Oscar Schou</h1>
     {/* <div className="profile-picture">
@@ -168,18 +176,18 @@ const HomePage = () => {
     <FontAwesomeIcon icon={faLinkedin} size="2x" className="social-icon linkedin-icon" />
   </a>
 </div>
+</div>
 
   </div>
 </section>
 
-
-        {/* Section 2 */}
-        <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
+  {/* Section 2 */}
+  <section className="scroll-section" ref={(el) => (sectionRefs.current[1] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[1] = el)}>
-            {/* Replace this with your Section 2 content (About Me) */}
-            <h1>About me</h1>
-            <AboutTabs />
+            {/* Replace this with your Section 3 content (Projects) */}
+            <h1 className='left-aligned-content-two'>Projects</h1>
+            <SwiperComponent />
           </div>
         </section>
 
@@ -187,11 +195,13 @@ const HomePage = () => {
         <section className="scroll-section" ref={(el) => (sectionRefs.current[2] = el)}>
           <div className="bg"></div>
           <div className="content" ref={(el) => (contentRefs.current[2] = el)}>
-            {/* Replace this with your Section 3 content (Projects) */}
-            <h1>Projects</h1>
-            <SwiperComponent />
+            {/* Replace this with your Section 2 content (About Me) */}
+            <h1 className='left-aligned-content-three'>About me</h1>
+            <AboutTabs />
           </div>
         </section>
+
+      
 
         {/* Add more sections if needed */}
 

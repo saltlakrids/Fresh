@@ -31,12 +31,21 @@ h2 {
     font-weight: 400;
     font-size: 15px;
   }
-h1, h2, h3, h4, h5, h6, .typewrite {
+h1, h2, h3, h4, h5, h6, .typewrite, .about-tab {
     text-shadow: 3px 3px 4px rgba(0, 0, 0, 5); 
   }
 
+  .left-aligned-content {
+    margin-left: -700px;
+  }
 
+  .left-aligned-content-two {
+    margin-left: -530px;
+  }
 
+  .left-aligned-content-three {
+    margin-left: -285px;
+  }
 
   .typewrite {
     text-decoration: none;
@@ -46,22 +55,7 @@ h1, h2, h3, h4, h5, h6, .typewrite {
     color: #fff;
   }
 
-  .profile-picture {
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    overflow: hidden; 
-    border: 1 px #333;
-  }
   
-  .profile-video {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-  }
-  
-
-
 .social-icon.github-icon {
   color: #fff; 
   margin-right: 20px;
@@ -78,14 +72,13 @@ h1, h2, h3, h4, h5, h6, .typewrite {
   
 
 header {
-  background-color: #333;
   color: #fff;
   padding: 1rem;
   text-align: center;  
 }
 
 footer {
-  background-color: #333;
+  background: linear-gradient(to bottom,  #00203FFF, #ADEFD1FF);
   color: #fff;
   padding: 1rem;
   text-align: center;
@@ -194,6 +187,7 @@ footer {
   width: 70px;
   cursor: pointer;
   border: 1px solid #fff;
+  color: #fff;
   border-radius: 4px;
   text-align: center;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -204,7 +198,8 @@ footer {
 
 .about-tab.active {
   background-color: #333;
-  color: #fff;
+  color: rgb(171, 200, 255);
+  border: 1px solid rgb(171, 200, 255);
   transform: scale(1.05);
 }
 
@@ -255,4 +250,23 @@ footer {
     margin-right: 10px; 
     margin-bottom: 10px;
     width: calc(50% - 10px); }
+
+  .left-aligned-content {
+      margin-left: 0px;
+    }
+
+  .left-aligned-content-two {
+    margin-left: -15px;
+    margin-bottom: 100px;
+  }
+  
+  .left-aligned-content-three {
+    margin-left: 5px;
+  }  
+
+  .tab-content img {
+    max-width: 100%; /* Set the max width to 100% for responsiveness */
+    height: auto;   /* Automatically adjust the height */
+  }
 }
+
