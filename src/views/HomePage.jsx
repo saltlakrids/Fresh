@@ -31,10 +31,10 @@ const HomePage = () => {
   const setInitialBackgroundColors = () => {
     gsap.set(sectionRefs.current[0], { backgroundColor: '#00203FFF' }); 
     gsap.set(sectionRefs.current[1], {
-      background: 'linear-gradient(to bottom, #ADEFD1FF, #00203FFF)',
+      background: 'linear-gradient(to bottom, #7A875B, #3C96AE',
     });
     gsap.set(sectionRefs.current[2], {
-      backgroundColor: '#00203FFF' ,
+      backgroundColor: '#7A907A' ,
     });
   };
 
