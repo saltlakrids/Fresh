@@ -10,7 +10,7 @@ import Typewriter from '../components/TypeWriter';
 import SwiperComponent from '../components/SwiperComponent';
 import AboutTabs from '../components/AboutTabs';
 import backgroundImg from '../img/IMG_0544.png';
-import MyParticles from '../components/Particles';
+
 
 
 import './Homepage.css';

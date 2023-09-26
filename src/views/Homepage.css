@@ -258,9 +258,11 @@ footer {
   .left-aligned-content-two {
     margin-left: -15px;
     margin-bottom: 100px;
+    margin-top: -20px;
   }
   
   .left-aligned-content-three {
+    margin-top: 220px;
     margin-left: 5px;
   }  
 
